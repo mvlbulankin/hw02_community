@@ -1,5 +1,4 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
 from .models import Post, Group
 
 
@@ -16,13 +15,6 @@ def index(request):
 
 
 def group_posts(request, slug):
-    # return HttpResponse(f'Мороженое номер {slug}')
-    # template = 'group/<slug:slug>/'
-    # title = 'Здесь будет информация о группах проекта Yatube'
-    # context = {
-    #     'title': title,
-    # }
-    # return render(request, template, context)
     # Функция get_object_or_404 получает по заданным критериям объект
     # из базы данных или возвращает сообщение об ошибке, если объект не найден.
     # В нашем случае в переменную group будут переданы объекты модели Group,
