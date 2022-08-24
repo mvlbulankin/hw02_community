@@ -1,54 +1,27 @@
 {% extends 'base.html' %}
-<!--<!DOCTYPE html> &lt;!&ndash; Используется html 5 версии &ndash;&gt;-->
-<!--<html lang="ru"> &lt;!&ndash; Язык сайта - русский &ndash;&gt;-->
-<!--  <head>    -->
-<!--    <meta charset="utf-8"> &lt;!&ndash; Кодировка сайта &ndash;&gt;-->
-<!--    &lt;!&ndash; Сайт готов работать с мобильными устройствами &ndash;&gt;-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
-<!--    &lt;!&ndash; Загружаем фав-иконки &ndash;&gt;-->
-<!--    <link rel="icon" href="img/fav/fav.ico" type="image">-->
-<!--    <link rel="apple-touch-icon" sizes="180x180" href="img/fav/apple-touch-icon.png">-->
-<!--    <link rel="icon" type="image/png" sizes="32x32" href="img/fav/favicon-32x32.png">-->
-<!--    <link rel="icon" type="image/png" sizes="16x16" href="img/fav/favicon-16x16.png">-->
-<!--    <meta name="msapplication-TileColor" content="#000">-->
-<!--    <meta name="theme-color" content="#ffffff">-->
-<!--    &lt;!&ndash; Подключен файл со стандартными стилями бустрап &ndash;&gt;-->
-<!--    <link rel="stylesheet" href="css/bootstrap.min.css">-->
-<!--    <title>{{ title }}</title>-->
-<!--  </head>-->
-  <body>
-    <header>
-      {% include 'includes/header.html' %}
-    </header>
-    <main>
-      {% block content %}
-      <!-- класс py-5 создает отступы сверху и снизу блока -->
-      <div class="container py-5">
-        {% for post in posts %}
-          <ul>
-            <li>
-              Автор: {{ post.author.get_full_name }}
-            </li>
-            <li>
-              Дата публикации: {{ post.pub_date|date:"d E Y" }}
-            </li>
-          </ul>
-          <p>{{ post.text }}</p>
-          {% if post.group %}
-            <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
-          {% endif %}
-          {% if not forloop.last %}<hr>{% endif %}
-        {% endfor %}
-      </div>
-      {% endblock %}
-    </main>
-    <!-- Использованы классы бустрапа: -->
-    <!-- border-top: создаёт тонкую линию сверху блока -->
-    <!-- text-center: выравнивает текстовые блоки внутри блока по центру -->
-    <!-- py-3: контент внутри размещается с отступом сверху и снизу -->         
-    <footer class="border-top text-center py-3">
-      <!-- тег span используется для добавления нужных стилей отдельным участкам текста --> 
-      {% include 'includes/footer.html' %}
-    </footer>
-  </body>
-</html>
+
+{% block head_title %}
+  Последние обновления на сайте
+{% endblock %}
+
+{% block title %}
+  <h1>Последние обновления на сайте</h1>
+{% endblock %}
+
+{% block content %}
+  {% for post in posts %}
+    <ul>
+      <li>
+        Автор: {{ post.author.get_full_name }}
+      </li>
+      <li>
+        Дата публикации: {{ post.pub_date|date:"d E Y" }}
+      </li>
+    </ul>
+    <p>{{ post.text }}</p>
+    {% if post.group %}
+      <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
+    {% endif %}
+    {% if not forloop.last %}<hr>{% endif %}
+  {% endfor %}
+{% endblock %}

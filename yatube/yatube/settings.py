@@ -130,3 +130,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# number of posts displayed on page in view functions
+
+NUM_OF_POSTS_ON_PAGE = 10
